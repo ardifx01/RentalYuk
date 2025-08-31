@@ -19,7 +19,7 @@
 </head>
 
 <body class="bg-gray-100">
-  <div class="flex h-screen bg-gray-100">
+  <div class="flex h-screen bg-gray-100"z>
     {{-- Side Bar --}}
     @include('admin.components.sidebar')
     <div class="flex-1 flex flex-col overflow-hidden">

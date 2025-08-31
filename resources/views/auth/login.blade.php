@@ -16,17 +16,18 @@
 
     <div class="w-full max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
         <div class="text-center mb-8">
-            <a href="#" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
+            <a href="/" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
             <h2 class="mt-2 text-2xl font-bold text-gray-900">Masuk ke Akun Anda</h2>
-            <p class="mt-2 text-sm text-gray-600">Belum punya akun? <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Daftar gratis</a></p>
+            <p class="mt-2 text-sm text-gray-600">Belum punya akun? <a href="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Daftar gratis</a></p>
         </div>
         
-        <form action="#" method="POST">
+        <form action="/login" method="POST">
+            @csrf
             <div class="space-y-6">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Pengguna</label>
                     <div class="mt-1">
-                        <input id="email" name="email" type="email" autocomplete="email" required class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input id="email" name="email" type="email" placeholder="rentalyuk@rental.com" autocomplete="email" required class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                 </div>
 
@@ -38,7 +39,7 @@
                         </div>
                     </div>
                     <div class="mt-1">
-                        <input id="password" name="password" type="password" autocomplete="current-password" required class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input id="password" placeholder="pass****" name="password" type="password" autocomplete="current-password" required class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                 </div>
                 

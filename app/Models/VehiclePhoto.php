@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehiclePhoto extends Model
 {
+    protected $table = 'vehicle_photos';
     protected $fillable = [
         'vehicle_id',
         'photo_url',
