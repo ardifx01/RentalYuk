@@ -18,7 +18,7 @@
 
   <div class="w-full max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
     <div class="text-center mb-4">
-      <a href="#" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
+      <a href="/" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
       <h2 class="mt-2 text-2xl font-bold text-gray-900">Verifikasi Email Anda</h2>
     </div>
     <div class="max-w-md mx-auto bg-white p-4 text-center">

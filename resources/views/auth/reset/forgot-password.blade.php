@@ -19,7 +19,7 @@
 
   <div class="w-full max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
     <div class="text-center mb-8">
-      <a href="#" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
+      <a href="/" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
       <h2 class="mt-2 text-2xl font-bold text-gray-900">Lupa Password Anda?</h2>
       <p class="mt-2 text-sm text-gray-600">Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang
         password Anda.</p>
