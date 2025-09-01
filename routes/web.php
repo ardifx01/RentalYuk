@@ -32,28 +32,30 @@ Route::middleware('guest')->group(function () {
 // Halaman/Fungsi yang bisa diakses jika sudah masuk / login
 Route::middleware(['auth'])->group(function () {
     // Fungsi Verifikasi Email Register
-    Route::prefix('email')->group(function () {
-        // Untuk menampilkan pemberitahuan bahwa harus mengklik link verifikasi di email yang dikirimkan Laravel setelah pendaftaran.
-        Route::get('/verify', function () {
-            return view('auth.verify');
-        })->name('verification.notice');
+    Route::middleware('unverified')->group(function () {
+        Route::prefix('email')->group(function () {
+            // Untuk menampilkan pemberitahuan bahwa harus mengklik link verifikasi di email yang dikirimkan Laravel setelah pendaftaran.
+            Route::get('/verify', function () {
+                return view('auth.verify');
+            })->name('verification.notice');
 
-        // untuk menangani permintaan saat user mengklik link verifikasi email di email.
-        Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-            $request->fulfill();
-            return redirect('/');
-        })->middleware(['signed'])->name('verification.verify');
+            // untuk menangani permintaan saat user mengklik link verifikasi email di email.
+            Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+                $request->fulfill();
+                return redirect('/');
+            })->middleware(['signed'])->name('verification.verify');
 
-        // untuk resend link verifikasi jika link verifikasi tidak dapat / hilang.
-        Route::post('/verification-notification', function (Request $request) {
-            $request->user()->sendEmailVerificationNotification();
-            return back()->with('message', 'Verification link sent!');
-        })->middleware(['throttle:4,1'])->name('verification.send');
+            // untuk resend link verifikasi jika link verifikasi tidak dapat / hilang.
+            Route::post('/verification-notification', function (Request $request) {
+                $request->user()->sendEmailVerificationNotification();
+                return back()->with('message', 'Verification link sent!');
+            })->middleware(['throttle:4,1'])->name('verification.send');
+        });
     });
     Route::middleware('verified')->group(function () {
         Route::get('/logout', [AuthController::class, 'userLogout'])->name('logout');
         // Sebagai role owner (Pemilik)
-        Route::prefix('owner')->group(function () {
+        Route::prefix('owner')->middleware('role:owner')->group(function () {
             Route::get('/dashboard', function () {
                 return view('owner.index');
             });
@@ -68,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
             });
         });
         // Sebagai role Admin
-        Route::prefix('admin')->group(function () {
+        Route::prefix('admin')->middleware('role:admin')->group(function () {
             Route::get('/dashboard', function () {
                 return view('admin.dashboard');
             });

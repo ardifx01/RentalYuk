@@ -61,7 +61,7 @@ class AuthController extends Controller
             if (!is_null(Auth::user()->email_verified_at)) {
                 if (Auth::user()->role === 'owner') {
                     return redirect('/owner/dashboard');
-                } elseif (Auth::user()->role === 'owner') {
+                } elseif (Auth::user()->role === 'admin') {
                     return redirect('/admin/dashboard');
                 }
             }
