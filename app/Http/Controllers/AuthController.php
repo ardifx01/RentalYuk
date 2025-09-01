@@ -69,6 +69,8 @@ class AuthController extends Controller
                 }
             }
             return redirect('/email/verify');
+        }else{
+            dd("Nemo");
         }
     }
 
@@ -113,9 +115,7 @@ class AuthController extends Controller
             }
         );
         return $status === Password::PasswordReset
-
-            ? redirect()->route('login')->with('status', __($status))
-
+            ? redirect("/login")->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
 }

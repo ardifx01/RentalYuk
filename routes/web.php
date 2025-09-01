@@ -25,15 +25,21 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', function () {
         return view('auth.register');
     });
+    // Route::get('/forgot-password', function () {
+    //     return view('auth.reset.forgot-password');
+    // });
+    // Route::get('/reset-password', function () {
+    //     return view('auth.reset.reset');
+    // });
     Route::post('/login', [AuthController::class, 'userLogin']);
     Route::post('/register', [AuthController::class, 'userRegister']);
 
     Route::get('/forgot-password', function () {
-        return view('auth.forgot-password');
+        return view('auth.reset.forgot-password');
     })->name('password.request');
     Route::post('/forgot-password', [AuthController::class, 'sendEmailForgotPassword'])->name('password.email');
     Route::get('/reset-password/{token}', function (string $token) {
-        return view('auth.reset-password', ['token' => $token]);
+        return view('auth.reset.reset', ['token' => $token]);
     })->middleware('guest')->name('password.reset');
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('guest')->name('password.update');
 });
