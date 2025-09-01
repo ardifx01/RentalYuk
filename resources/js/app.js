@@ -1,5 +1,6 @@
 import "./bootstrap";
 import Chart from "chart.js/auto";
+import 'flowbite';
 
 const ctx = document.getElementById("transactionsChart").getContext("2d");
 const transactionsChart = new Chart(ctx, {

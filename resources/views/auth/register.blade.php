@@ -13,6 +13,7 @@
     }
   </style>
 </head>
+
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="w-full max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
     <div class="text-center mb-8">
@@ -24,6 +25,20 @@
     <form action="/register" method="POST">
       @csrf
       <div class="space-y-6">
+        @if (session('status'))
+          <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
+            {{ session('status') }}
+          </div>
+        @endif
+        @if ($errors->any())
+          <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
           <div class="mt-1">
@@ -70,4 +85,5 @@
     </form>
   </div>
 </body>
+
 </html>

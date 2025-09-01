@@ -19,35 +19,39 @@ Route::get('/detail', function () {
 
 // Halaman/Fungsi yang bisa diakses jika belum masuk / login
 Route::middleware('guest')->group(function () {
+    // Halaman Login
     Route::get('/login', function () {
         return view('auth.login');
     })->name('login');
+    // Halaman Register
     Route::get('/register', function () {
         return view('auth.register');
     });
-    // Route::get('/forgot-password', function () {
-    //     return view('auth.reset.forgot-password');
-    // });
-    // Route::get('/reset-password', function () {
-    //     return view('auth.reset.reset');
-    // });
+    // Fungsi Proses Login
     Route::post('/login', [AuthController::class, 'userLogin']);
+    //Fungsi Proses Register
     Route::post('/register', [AuthController::class, 'userRegister']);
 
+    // Halaman Forgot Password
     Route::get('/forgot-password', function () {
         return view('auth.reset.forgot-password');
     })->name('password.request');
+    // Fungsi Proses Forgot Password
     Route::post('/forgot-password', [AuthController::class, 'sendEmailForgotPassword'])->name('password.email');
+    // Halaman Reset/Ganti Password
     Route::get('/reset-password/{token}', function (string $token) {
         return view('auth.reset.reset', ['token' => $token]);
     })->middleware('guest')->name('password.reset');
+    // Fungsi Proses Reset Password
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('guest')->name('password.update');
 });
 
 // Halaman/Fungsi yang bisa diakses jika sudah masuk / login
 Route::middleware(['auth'])->group(function () {
-    // Fungsi Verifikasi Email Register
+    Route::get('/logout', [AuthController::class, 'userLogout'])->name('logout');
+    // Khusus Sudah Login tapi belum verifikasi
     Route::middleware('unverified')->group(function () {
+        // Fungsi Verifikasi Email Register
         Route::prefix('email')->group(function () {
             // Untuk menampilkan pemberitahuan bahwa harus mengklik link verifikasi di email yang dikirimkan Laravel setelah pendaftaran.
             Route::get('/verify', function () {
@@ -67,9 +71,9 @@ Route::middleware(['auth'])->group(function () {
             })->middleware(['throttle:4,1'])->name('verification.send');
         });
     });
+    // Khusus Sudah Login dan verifikasi
     Route::middleware('verified')->group(function () {
-        Route::get('/logout', [AuthController::class, 'userLogout'])->name('logout');
-        // Sebagai role owner (Pemilik)
+        // Khusus role owner (Pemilik)
         Route::prefix('owner')->middleware('role:owner')->group(function () {
             Route::get('/dashboard', function () {
                 return view('owner.index');
@@ -84,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
                 return view('owner.pengaturan');
             });
         });
-        // Sebagai role Admin
+        // Khusus role Admin
         Route::prefix('admin')->middleware('role:admin')->group(function () {
             Route::get('/dashboard', function () {
                 return view('admin.dashboard');

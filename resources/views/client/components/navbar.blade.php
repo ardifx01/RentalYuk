@@ -9,13 +9,23 @@
       <a href="#kontak" class="text-gray-600 hover:text-indigo-600 transition duration-300">Kontak</a>
     </div>
     <div class="hidden md:flex items-center space-x-4">
-      @if (session()->has('name'))
-      <b>Welcome, {{ session('name') }}</b>
-      @else
-      <a href="/login" class="text-gray-600 hover:text-indigo-600">Masuk</a>
-      <a href="/register"
-        class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300">Daftar</a>
-      @endif
+      @auth
+        <!-- Button trigger -->
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+          class="text-black bg-violet-50 hover:bg-violet-500 hover:text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+          type="button">
+          <b>Welcome, {{ session('name') }}</b>
+          <svg class="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 4 4 4-4" />
+          </svg>
+        </button>
+      @endauth
+      @guest
+        <a href="/login" class="text-gray-600 hover:text-indigo-600">Masuk</a>
+        <a href="/register"
+          class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300">Daftar</a>
+      @endguest
     </div>
     <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -30,9 +40,38 @@
     <a href="#tentang" class="block text-gray-600 hover:text-indigo-600 py-2">Tentang Kami</a>
     <a href="#kontak" class="block text-gray-600 hover:text-indigo-600 py-2">Kontak</a>
     <div class="border-t border-gray-200 mt-4 pt-4">
-      <a href="/login" class="block text-gray-600 hover:text-indigo-600 py-2">Masuk</a>
-      <a href="/register"
-        class="block bg-indigo-600 text-white text-center px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300 mt-2">Daftar</a>
+      @auth
+        <!-- Button trigger -->
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+          class="text-black bg-violet-50 w-full hover:bg-violet-500 hover:text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between"
+          type="button">
+          Welcome, {{ session('name') }}
+          <svg class="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 4 4 4-4" />
+          </svg>
+        </button>
+      @endauth
+      @guest
+        <a href="/login" class="block text-gray-600 hover:text-indigo-600 py-2">Masuk</a>
+        <a href="/register"
+          class="block bg-indigo-600 text-white text-center px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300 mt-2">Daftar</a>
+      @endguest
     </div>
   </div>
+  @auth
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+        <li>
+          <a href="/{{ auth()->user()->role }}/dashboard"
+            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+        </li>
+        <li>
+          <a href="logout" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Log
+            out</a>
+        </li>
+      </ul>
+    </div>
+  @endauth
 </header>

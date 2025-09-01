@@ -29,11 +29,13 @@
         {{ session('status') }}
       </div>
     @endif
-    @error('email')
+    @if ($errors->any())
       <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
-        {{ $message }}
+        @foreach ($errors->all() as $error)
+          {{ $error }}
+        @endforeach
       </div>
-    @enderror
+    @endif
     <form action="/forgot-password" method="POST">
       @csrf
       <div class="space-y-6">
