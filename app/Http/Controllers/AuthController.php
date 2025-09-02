@@ -123,7 +123,7 @@ class AuthController extends Controller
         );
         return $status === Password::ResetLinkSent
             ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+            : back()->withErrors(['email' => "Email tidak dapat ditemukan / tidak valid"]);
     }
     public function resetPassword(Request $request)
     {
@@ -151,6 +151,6 @@ class AuthController extends Controller
         );
         return $status === Password::PasswordReset
             ? redirect("/login")->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+            : back()->withErrors(['email' => "Email tidak dapat ditemukan / tidak valid"]);
     }
 }

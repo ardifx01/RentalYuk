@@ -7,11 +7,6 @@
   <title>Daftar Akun Baru - RentalYuk</title>
   @vite('resources/css/app.css')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -42,28 +37,28 @@
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
           <div class="mt-1">
-            <input id="name" name="name" type="text" required
+            <input id="name" name="name" type="text" required placeholder="Nama Pengguna"
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
         </div>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
           <div class="mt-1">
-            <input id="email" name="email" type="email" autocomplete="email" required
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="contoh@email.com"
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
         </div>
         <div>
           <label for="phone" class="block text-sm font-medium text-gray-700">Nomor WhatsApp</label>
           <div class="mt-1">
-            <input id="phone" name="phone" type="tel" required
+            <input id="phone" name="phone" type="tel" required placeholder="08926... (Maks 20 nomor)"
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
           <div class="mt-1">
-            <input id="password" name="password" type="password" autocomplete="new-password" required
+            <input id="password" name="password" type="password" autocomplete="new-password" required placeholder="Minimal 8 Karakter"
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
         </div>
@@ -71,7 +66,7 @@
           <label for="password" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
           <div class="mt-1">
             <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password"
-              required
+              required placeholder="Konfirmasi Password Awal"
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
         </div>

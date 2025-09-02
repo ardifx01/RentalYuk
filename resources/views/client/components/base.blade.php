@@ -8,11 +8,6 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @yield('custom-css')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-100 text-gray-800">

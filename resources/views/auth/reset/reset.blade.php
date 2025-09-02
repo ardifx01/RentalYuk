@@ -8,11 +8,6 @@
   <!-- Memuat Tailwind CSS -->
   @vite('resources/css/app.css')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -45,7 +40,7 @@
         <div>
           <label for="new-password" class="block text-sm font-medium text-gray-700">Password Baru</label>
           <div class="mt-1 relative">
-            <input id="new-password" name="password" type="password" placeholder="••••••••" required
+            <input id="new-password" name="password" type="password" placeholder="Minimal 8 Karakter" required
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10">
             <button type="button" id="toggleNewPassword"
               class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 focus:outline-none">
@@ -70,7 +65,7 @@
         <div>
           <label for="confirm-password" class="block text-sm font-medium text-gray-700">Konfirmasi Password Baru</label>
           <div class="mt-1 relative">
-            <input id="confirm-password" name="password_confirmation" type="password" placeholder="••••••••" required
+            <input id="confirm-password" name="password_confirmation" type="password" placeholder="Masukan kembali Password baru" required
               class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10">
             <button type="button" id="toggleConfirmPassword"
               class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 focus:outline-none">
