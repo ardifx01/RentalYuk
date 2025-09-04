@@ -82,7 +82,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/form-iklan', function () {
                 return view('owner.form_iklan');
             });
-
+            Route::prefix('owner')->group(function () {
+            Route::get('/pricing', function () {
+            return view('owner.pricing');
+            })->name('owner.pricing');
+            });
+            Route::get('/userlist', function () {
+                return view('admin.pengguna');
+            });
 
             Route::get('/pengaturan', function () {
                 return view('owner.pengaturan');
@@ -102,9 +109,8 @@ Route::middleware(['auth'])->group(function () {
                 return view('admin.paket');
             });
 
-            Route::get('/userlist', function () {
-                return view('admin.pengguna');
+            
             });
         });
     });
-});
+
