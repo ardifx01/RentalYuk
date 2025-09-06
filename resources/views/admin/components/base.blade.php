@@ -19,6 +19,7 @@
     <!-- Main Content -->
     @yield('page-content')
   </div>
+  @yield('page-component')
   @yield('custom-js')
 
 </body>

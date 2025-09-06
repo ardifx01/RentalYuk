@@ -1,7 +1,5 @@
 @extends('client.components.base')
 
-@extends('client.components.base')
-
 @section('page-content')
   <main class="bg-gray-50">
     <section class="relative text-center py-20 md:py-32 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?q=80&w=1964&auto=format&fit=crop');">

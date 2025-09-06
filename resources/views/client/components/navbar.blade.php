@@ -14,7 +14,7 @@
         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
           class="text-black bg-violet-50 hover:bg-violet-500 hover:text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
           type="button">
-          <b>Welcome, {{ session('name') }}</b>
+          <b>Welcome, {{ auth()->user()->name }}</b>
           <svg class="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 4 4 4-4" />
@@ -45,7 +45,7 @@
         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
           class="text-black bg-violet-50 w-full hover:bg-violet-500 hover:text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between"
           type="button">
-          Welcome, {{ session('name') }}
+          Welcome, {{ auth()->user()->name }}
           <svg class="w-2.5 h-2.5 ms-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="m1 1 4 4 4-4" />

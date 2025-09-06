@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserPlan;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class EnsureEmailIsNotVerified
+class CheckUserPlan
 {
     /**
      * Handle an incoming request.
@@ -15,15 +17,10 @@ class EnsureEmailIsNotVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->hasVerifiedEmail()) {
-            $role = $request->user()->role;
-            if ($role === 'owner') {
-                return redirect('/owner/dashboard');
-            } elseif ($role === 'admin') {
-                return redirect('/admin/dashboard');
-            }
+        $user = UserPlan::where('user_id', Auth::user()->id)->first();
+        if (!$user && Auth::user()->role === 'owner') {
+            return redirect('/owner/pricing')->with('error', 'Anda harus memilih paket terlebih dahulu.');
         }
-
         return $next($request);
     }
 }

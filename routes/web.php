@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OwnerController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -61,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
             // untuk menangani permintaan saat user mengklik link verifikasi email di email.
             Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
                 $request->fulfill();
-                return redirect('/');
+                return redirect('/owner/pricing')->with(['status' => 'Akun Berhasil Diverifikasi, Selamat Beriklan...']);
             })->middleware(['signed'])->name('verification.verify');
 
             // untuk resend link verifikasi jika link verifikasi tidak dapat / hilang.
@@ -75,24 +77,26 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('verified')->group(function () {
         // Khusus role owner (Pemilik)
         Route::prefix('owner')->middleware('role:owner')->group(function () {
-            Route::get('/dashboard', function () {
-                return view('owner.index');
-            });
-
-            Route::get('/form-iklan', function () {
-                return view('owner.form_iklan');
-            });
-            Route::prefix('owner')->group(function () {
             Route::get('/pricing', function () {
-            return view('owner.pricing');
-            })->name('owner.pricing');
+                return view('owner.pricing');
             });
-            Route::get('/userlist', function () {
-                return view('admin.pengguna');
-            });
+            Route::post('/pricing', [OwnerController::class, 'ownerAturPaket']);
+            Route::middleware('planless')->group(function () {
+                Route::get('/dashboard', function () {
+                    return view('owner.dashboard');
+                });
 
-            Route::get('/pengaturan', function () {
-                return view('owner.pengaturan');
+                Route::get('/form-iklan', function () {
+                    return view('owner.form_iklan');
+                });
+
+                Route::get('/userlist', function () {
+                    return view('admin.pengguna');
+                });
+
+                Route::get('/pengaturan', [OwnerController::class, 'ownerTampilProfil']);
+                Route::put('/pengaturan', [OwnerController::class, 'ownerAturProfil']);
+                Route::put('/pengaturan/pass', [OwnerController::class, 'ownerAturPass']);
             });
         });
         // Khusus role Admin
@@ -101,16 +105,12 @@ Route::middleware(['auth'])->group(function () {
                 return view('admin.dashboard');
             });
 
-            Route::get('/moderasi', function () {
-                return view('admin.moderasi');
-            });
+            Route::get('/moderasi', [AdminController::class, 'adminTampilModerasi']);
+            Route::post('/moderasi', [AdminController::class, 'adminAturModerasi']);
 
-            Route::get('/paket', function () {
-                return view('admin.paket');
-            });
-
-            
-            });
+            Route::get('/paket', [AdminController::class, 'adminTampilPaket']);
+            Route::post('/paket', [AdminController::class, 'adminAturPaket']);
+            Route::get('/userlist', [AdminController::class, 'adminTampilPengguna']);
         });
     });
-
+});

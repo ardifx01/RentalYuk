@@ -19,8 +19,9 @@ return new class extends Migration
             $table->decimal('price_per_day', 12, 2);
             $table->string('city');
             $table->text('address');
-            // $table->string('main_photo_url')->nullable(); // URL foto utama
+            $table->string('main_photo_url')->nullable(); // URL foto utama
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('mod_status', ['approve', 'waiting', 'reject'])->default('waiting');
             $table->boolean('is_premium')->default(false);
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -51,11 +52,15 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
             'password' => Hash::make($validated['password']),
-            'role' => 'owner', // default
+            'role' => 'owner', 
         ]);
         Auth::login($user);
-        session(['name' => $request->name]);
         event(new Registered($user));
+        $plan = DB::table('plans')
+            ->join('user_plans', 'user_plans.plan_id', '=', 'plans.id')
+            ->where('user_plans.user_id', $user->id)
+            ->select('plans.name')->first();
+        session(['plan' => $plan]);
         if (!is_null($user->email_verified_at)) {
             return redirect('/owner/dashboard');
         }
@@ -85,7 +90,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
             $request->session()->regenerateToken();
-            session(['name' => Auth::user()->name]);
+            $plan = DB::table('plans')
+                ->join('user_plans', 'user_plans.plan_id', '=', 'plans.id')
+                ->where('user_plans.user_id', Auth::user()->id)
+                ->select('plans.name as plan')->first();
+            session(['plan' => $plan]);
             if (!is_null(Auth::user()->email_verified_at)) {
                 if (Auth::user()->role === 'owner') {
                     return redirect('/owner/dashboard');

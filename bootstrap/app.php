@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckUserPlan;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'unverified' => EnsureEmailIsNotVerified::class,
+            'planless' => CheckUserPlan::class,
 
         ]);
     })

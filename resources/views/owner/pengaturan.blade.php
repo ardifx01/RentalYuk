@@ -4,24 +4,26 @@
 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
   <div class="max-w-2xl mx-auto">
     <!-- Form Profil Akun -->
-    <form action="#" method="POST" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+    <form action="/owner/pengaturan" method="POST" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+      @csrf
+      @method('PUT')
       <h2 class="text-xl font-semibold border-b pb-4 mb-6">Profil Akun</h2>
       <div class="space-y-4">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-          <input type="text" name="name" id="name" value="Budi Santoso"
+          <input type="text" name="name" id="name" value="{{$userData->name}}"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
-          <input type="email" name="email" id="email" value="budi.santoso@example.com"
-            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-50"
+          <input type="email" name="email" id="email" value="{{ $userData->email }}"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-200"
             readonly disabled>
           <p class="mt-1 text-xs text-gray-500">Email tidak dapat diubah.</p>
         </div>
         <div>
           <label for="phone" class="block text-sm font-medium text-gray-700">Nomor WhatsApp</label>
-          <input type="tel" name="phone" id="phone" value="081234567890"
+          <input type="tel" name="phone" id="phone" value="{{ $userData->phone }}"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
       </div>
@@ -33,22 +35,24 @@
     </form>
 
     <!-- Form Ubah Password -->
-    <form action="#" method="POST" class="bg-white p-6 rounded-lg shadow-lg">
+    <form action="/owner/pengaturan/pass" method="POST" class="bg-white p-6 rounded-lg shadow-lg">
+      @csrf
+      @method('PUT')
       <h2 class="text-xl font-semibold border-b pb-4 mb-6">Ubah Password</h2>
       <div class="space-y-4">
-        <div>
+        {{-- <div>
           <label for="current_password" class="block text-sm font-medium text-gray-700">Password Saat Ini</label>
           <input type="password" name="current_password" id="current_password"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        </div>
+        </div> --}}
         <div>
-          <label for="new_password" class="block text-sm font-medium text-gray-700">Password Baru</label>
-          <input type="password" name="new_password" id="new_password"
+          <label for="password" class="block text-sm font-medium text-gray-700">Password Baru</label>
+          <input type="password" name="password" id="password"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         <div>
-          <label for="confirm_password" class="block text-sm font-medium text-gray-700">Konfirmasi Password Baru</label>
-          <input type="password" name="confirm_password" id="confirm_password"
+          <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password Baru</label>
+          <input type="password" name="password_confirmation" id="password_confirmation"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
       </div>
