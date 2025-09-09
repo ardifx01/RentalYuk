@@ -42,7 +42,7 @@
     <div class="border-t border-gray-200 mt-4 pt-4">
       @auth
         <!-- Button trigger -->
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown2"
           class="text-black bg-violet-50 w-full hover:bg-violet-500 hover:text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between"
           type="button">
           Welcome, {{ auth()->user()->name }}
@@ -62,6 +62,19 @@
   @auth
     <!-- Dropdown menu -->
     <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 ">
+      <ul class="py-2 text-sm text-gray-700 ">
+        <li>
+          <a href="/{{ auth()->user()->role }}/dashboard"
+            class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+        </li>
+        <li>
+          <a href="logout" class="block px-4 py-2 hover:bg-gray-100">Log
+            out</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Dropdown menu -->
+    <div id="dropdown2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 ">
       <ul class="py-2 text-sm text-gray-700 ">
         <li>
           <a href="/{{ auth()->user()->role }}/dashboard"
