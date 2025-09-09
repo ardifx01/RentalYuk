@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->text('address');
             $table->string('main_photo_url')->nullable(); // URL foto utama
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->enum('mod_status', ['approve', 'waiting', 'reject'])->default('waiting');
             $table->boolean('is_premium')->default(false);
             $table->timestamps();

@@ -5,9 +5,9 @@
     <div>
       <!-- Modal toggle -->
       <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
-        class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+        class="add-btn text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
         <span class="flex">
-          <svg class="me-2 w-6 h-6 text-white aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+          <svg class="me-2 w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
             height="24" fill="none" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="M2 7c0-1.10457.89543-2 2-2h16c1.1046 0 2 .89543 2 2v4c0 .5523-.4477 1-1 1s-1-.4477-1-1v-1H4v7h10c.5523 0 1 .4477 1 1s-.4477 1-1 1H4c-1.10457 0-2-.8954-2-2V7Z" />
@@ -47,26 +47,10 @@
                   @endif
                 </td>
                 <td class="px-6 py-4 space-x-2">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  <button data-id="{{ $data->id }}" type="button" data-modal-target="default-modal" data-modal-toggle="default-modal" class="edit-btn text-indigo-600 hover:text-indigo-900">Edit</button>
                 </td>
               </tr>
             @endforeach
-            {{-- <tr>
-              <td class="px-6 py-4 font-medium text-gray-900">Premium</td>
-              <td class="px-6 py-4 text-gray-800">Rp 50.000</td>
-              <td class="px-6 py-4 text-gray-800">5</td>
-              <td class="px-6 py-4 text-gray-800">30 Hari</td>
-              <td class="px-6 py-4 space-x-2"><a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a><a
-                  href="#" class="text-red-600 hover:text-red-900">Hapus</a></td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 font-medium text-gray-900">Super Premium</td>
-              <td class="px-6 py-4 text-gray-800">Rp 100.000</td>
-              <td class="px-6 py-4 text-gray-800">15</td>
-              <td class="px-6 py-4 text-gray-800">30 Hari</td>
-              <td class="px-6 py-4 space-x-2"><a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a><a
-                  href="#" class="text-red-600 hover:text-red-900">Hapus</a></td>
-            </tr> --}}
           </tbody>
         </table>
       </div>
@@ -97,7 +81,7 @@
           </button>
         </div>
         <!-- Modal body -->
-        <form action="/admin/paket" method="POST">
+        <form action="/admin/paket" method="POST" id="planForm">
           @csrf
           <div class="p-4 md:p-5 space-y-4">
             <div class="mb-5">
@@ -142,4 +126,36 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('custom-js')
+<script>
+  document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      let form = document.getElementById('planForm');
+      let existing = form.querySelector("input[name='_method']");
+      if (existing) existing.remove();
+      form.reset(); 
+    });
+  });
+  document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const plan = @json($paketDatas);
+      const id = this.getAttribute('data-id');
+      const v = plan.find(item => item.id == id);
+      document.getElementById('adsName').value = v.name;
+      document.getElementById('adsPrice').value = v.price;
+      document.getElementById('adsQuota').value = v.quota_ads;
+      document.getElementById('adsTime').value = v.duration_days;
+
+      let form = document.getElementById('planForm');
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "_method";
+      input.value = "PUT";
+      form.appendChild(input);
+      form.action = "/admin/paket/" + id;
+    });
+  });
+</script>
 @endsection

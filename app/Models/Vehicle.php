@@ -17,6 +17,7 @@ class Vehicle extends Model
         'city',
         'address',
         'status',
+        'mod_status',
         'is_premium',
     ];
 

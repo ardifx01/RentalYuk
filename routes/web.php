@@ -82,17 +82,16 @@ Route::middleware(['auth'])->group(function () {
             });
             Route::post('/pricing', [OwnerController::class, 'ownerAturPaket']);
             Route::middleware('planless')->group(function () {
-                Route::get('/dashboard', function () {
-                    return view('owner.dashboard');
-                });
+                Route::get('/dashboard', [OwnerController::class, 'ownerTampilDashboard']);
+                Route::put('/ad-switch/{id}', [OwnerController::class, 'ownerStatusIklan']);
 
                 Route::get('/form-iklan', function () {
                     return view('owner.form_iklan');
                 });
-
-                Route::get('/userlist', function () {
-                    return view('admin.pengguna');
-                });
+                Route::post('/form-iklan', [OwnerController::class, 'ownerTambahIklan']);
+                Route::get('/form-iklan/edit/{id}', [OwnerController::class, 'ownerTampilEditIklan']);
+                Route::put('/form-iklan/edit/{id}', [OwnerController::class, 'ownerEditIklan']);
+                Route::delete('/form-iklan/delete/{id}', [OwnerController::class, 'ownerHapusIklan']);
 
                 Route::get('/pengaturan', [OwnerController::class, 'ownerTampilProfil']);
                 Route::put('/pengaturan', [OwnerController::class, 'ownerAturProfil']);
@@ -101,15 +100,15 @@ Route::middleware(['auth'])->group(function () {
         });
         // Khusus role Admin
         Route::prefix('admin')->middleware('role:admin')->group(function () {
-            Route::get('/dashboard', function () {
-                return view('admin.dashboard');
-            });
+            Route::get('/dashboard', [AdminController::class, 'adminTampilDashboard']);
 
             Route::get('/moderasi', [AdminController::class, 'adminTampilModerasi']);
-            Route::post('/moderasi', [AdminController::class, 'adminAturModerasi']);
+            Route::put('/moderasi/{decision}-{id}', [AdminController::class, 'adminAturModerasi']);
 
             Route::get('/paket', [AdminController::class, 'adminTampilPaket']);
             Route::post('/paket', [AdminController::class, 'adminAturPaket']);
+            Route::put('/paket/{id}', [AdminController::class, 'adminEditPaket']);
+
             Route::get('/userlist', [AdminController::class, 'adminTampilPengguna']);
         });
     });

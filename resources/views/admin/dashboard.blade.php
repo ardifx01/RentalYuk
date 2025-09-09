@@ -6,15 +6,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="bg-white p-6 rounded-lg shadow-lg">
         <p class="text-sm text-gray-500">Total Pengguna</p>
-        <p class="text-3xl font-bold text-gray-800">142</p>
+        <p class="text-3xl font-bold text-gray-800">{{ $adminStats->jumlah_user }}</p>
       </div>
       <div class="bg-white p-6 rounded-lg shadow-lg">
         <p class="text-sm text-gray-500">Total Iklan</p>
-        <p class="text-3xl font-bold text-gray-800">210</p>
+        <p class="text-3xl font-bold text-gray-800">{{ $adminStats->jumlah_iklan_approved }}</p>
       </div>
       <div class="bg-white p-6 rounded-lg shadow-lg">
         <p class="text-sm text-gray-500">Iklan Pending</p>
-        <p class="text-3xl font-bold text-yellow-500">3</p>
+        <p class="text-3xl font-bold text-yellow-500">{{ $adminStats->jumlah_iklan_menunggu}}</p>
       </div>
       <div class="bg-white p-6 rounded-lg shadow-lg">
         <p class="text-sm text-gray-500">Pendapatan (Bulan Ini)</p>

@@ -16,6 +16,6 @@ class Plan extends Model
     // Relationships
     public function userPlans()
     {
-        return $this->hasMany(UserPlan::class);
+        return $this->belongsTo(UserPlan::class);
     }
 }

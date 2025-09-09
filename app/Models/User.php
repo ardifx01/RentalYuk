@@ -38,6 +38,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 
     public function userPlans()
     {
-        return $this->hasMany(UserPlan::class);
+        return $this->hasOne(UserPlan::class);
     }
 }
