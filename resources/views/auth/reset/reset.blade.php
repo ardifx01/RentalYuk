@@ -5,20 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atur Ulang Password - RentalYuk</title>
-  <!-- Memuat Tailwind CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   @vite('resources/css/app.css')
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-animated-gradient flex items-center justify-center min-h-screen font-inter">
 
-  <div class="w-full max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
-    <div class="text-center mb-8">
-      <a href="/" class="text-3xl font-bold text-indigo-600">RentalYuk</a>
-      <h2 class="mt-2 text-2xl font-bold text-gray-900">Atur Ulang Password Anda</h2>
-      <p class="mt-2 text-sm text-gray-600">Masukkan password baru Anda di bawah ini.<br> atas email :
-        <b>{{ request('email') }}</b>
-      </p>
+<div data-aos="fade-up" class="w-full max-w-md mx-auto bg-white/20 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/30">
+<div class="text-center mb-8">
+<a href="/" class="text-4xl font-bold text-white tracking-wider">RentalYuk</a>
+      <h2 class="mt-4 text-2xl font-bold text-white">Atur Ulang Password Anda</h2>
+      <p class="mt-2 text-sm text-indigo-200">Masukkan password baru Anda untuk akun:<br><b class="text-white">{{ request('email') }}</b></p>
     </div>
     @if (session('status'))
       <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
@@ -89,8 +87,8 @@
 
         <div>
 
-          <button type="submit"
-            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="submit"
+            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform hover:scale-105 transition-all duration-300">
             Simpan Password Baru
           </button>
         </div>
@@ -98,11 +96,14 @@
     </form>
     <div class="text-center mt-6">
       <p class="text-sm text-gray-600">
-        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500">‹ Kembali ke Login</a>
+      <a href="{{ route('login') }}" class="font-medium text-white hover:underline">‹ Kembali ke Login</a>
       </p>
     </div>
   </div>
-
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
   <script>
     function setupPasswordToggle(toggleButtonId, passwordInputId, eyeIconId, eyeSlashIconId) {
       const toggleButton = document.getElementById(toggleButtonId);
