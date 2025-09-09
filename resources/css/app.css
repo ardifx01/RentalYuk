@@ -15,20 +15,26 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+
+/* Kode gradien Anda yang sudah ada. 
+   Bisa dihapus jika tidak dipakai, tapi aman jika dibiarkan saja.
+*/
 .bg-animated-gradient {
     background: linear-gradient(-45deg, #342f9a, #51269c, #961b52, #0e367a);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
-  }
-  
-  @keyframes gradientAnimation {
+}
+ 
+@keyframes gradientAnimation {
     0% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
     50% {
-      background-position: 100% 50%;
+        background-position: 100% 50%;
     }
     100% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
-  }
+}
+
+
